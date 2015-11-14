@@ -1,10 +1,11 @@
-{% extends "layout.html" %}
+{%extends "master.html"%}
 
-{% block content %}
+{%block title%}Index{%endblock%}
 
-<div class = "jumbotron">
-    <h1>Welcome to the Hackathon App</h1>
-    <p class = "lead">This application takes in group info, and returns stuff</p>
-</div>
-
+{%block head %}
+{{super()}}
 {% endblock %}
+
+{% block body %}
+<h1>Header</h1>
+{%endblock%}

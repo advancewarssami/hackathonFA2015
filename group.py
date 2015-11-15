@@ -1,13 +1,12 @@
-import pickle
+class group(object):
 
-class Group(object):
 
     def __init__(self, name):
         self.alltimes = []
         for day in range(0, 7):
             for hour in range(0, 24):
-                self.alltimes.append(Time(day, hour, 0))
-                self.alltimes.append(Time(day, hour, 30))
+                self.alltimes.append(time(day, hour, 0))
+                self.alltimes.append(time(day, hour, 30))
         self.name = name
         self.users = []
 
@@ -26,12 +25,6 @@ class Group(object):
                     badtimes.append(time)
         return time.get_good_times(self.alltimes, badtimes)
 
-    def serialize_good_times(self):
-        return str(pickle.dumps(self.get_available_times()))
-
-    def unserialize_good_times(self, bin_dump):
-        return pickle.loads(bin_dump)
-
     def __repr__(self):
         string = ""
         string += self.name
@@ -40,7 +33,7 @@ class Group(object):
         return string
 
 
-class User(object):
+class user(object):
 
     def __init__(self, name):
         self.name = name
@@ -48,7 +41,7 @@ class User(object):
         self.times = []
 
     def add_bad_time(self, starttime, endtime):
-        self.times.append(TimeRange(self.group.alltimes, starttime, endtime))
+        self.times.append(timeRange(self.group.alltimes, starttime, endtime))
 
     def get_bad_times(self):
         return self.times
@@ -65,8 +58,8 @@ class User(object):
         return string
 
 
-class Time(object):
-    def __init__(self, day, hour, minute):  # day sunday = 0, monday = 1, tuesday = 2, ...  saturday = 6
+class time(object):
+    def __init__(self, day, hour, minute):  #day sunday = 0, monday = 1, tuesday = 2, ...  saturday = 6
         self.day = day
         self.hour = hour
         self.minute = minute
@@ -115,12 +108,12 @@ class Time(object):
                     return True
         return False
 
-class TimeRange(object):
+class timeRange(object):
 
     def __init__(self, alltimes, starttime, endtime):
         self.times = []
         self.times.append(starttime)
-        for t in Time.get_intermediate_times(alltimes, starttime, endtime):
+        for t in time.get_intermediate_times(alltimes, starttime, endtime):
             self.times.append(t)
         self.times.append(endtime)
 

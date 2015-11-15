@@ -1,85 +1,68 @@
-from flask import Flask, render_template, g
-import handle_db
-import group
-import sqlite3
-
-
+from flask import Flask, render_template, request, make_response, redirect, url_for
+from urllib.parse import urlparse, urljoin
+# import group
+# import handle_db
 app = Flask(__name__)
-'''
-conn = sqlite3.connect('user_db.db')
-cur = conn.cursor()
-
-cur.execute("CREATE TABLE groups
-                    (group_id, group_good_times)")
-'''
-'''
-c.execute("CREATE TABLE users
-                 (group_id text, user_name, )")
-
-c.execute("CREATE TABLE user_times
-                (user_id integer, user_times text)")
-'''
-'''
-c.execute("INSERT INTO users VALUES ('alskdfj3', 'jordan')")
-conn.commit()
-conn.close()
-
-a = group.User("Jordan")
-print(a.save())
-'''
-
-'''
-def select_user(params=()):
-    con = sqlite3.connect('user_db.db')
-    cur = con.cursor()
-    if params == ():
-        cur.execute("select * from users")
-    else:
-        string = "select"
-        for i in range(len(params) - 1):
-            string += "%s,"
-        string += "%s"
-        string += "from users"
-'''
-'''
-time_a = group.Time(1, 7, 0)
-time_b = group.Time(1, 8, 0)
-time_c = group.Time(1, 7, 30)
-time_d = group.Time(1, 8, 30)
-
-group_a = group.Group('groupy_group')
-
-user_a = group.User('jma829')
-user_b = group.User('jda763')
-
-
-group_a.add_user(user_a)
-group_a.add_user(user_b)
-
-
-user_a.add_bad_time(time_a, time_b)
-user_b.add_bad_time(time_c, time_d)
-
-
-handle_db.insert_group(group_a)
-
-handle_db.query_for_group_times(group_a.name)
-'''
 
 
 
+def build_table(group_id):
+    # return group.unserialize_good_times(handle_db.query_for_good_times(group_id))
+    return request.cookies.get('group_id')
 
-@app.route("/create_group")
+
+@app.route("/")
+def hello():
+    return render_template('input.html')
+
+
+@app.route("/group", methods=['POST'])
+def find_group():
+    group_id = request.form['group_name']
+    resp = make_response(render_template('group.html', group_id=group_id))
+    resp.set_cookie('group_id', group_id)
+    return resp
+
+
+@app.route("/group/create_group")
 def create_group():
     return render_template('create_group.html')
 
 
-@app.route("/group")
-def group():
-    return render_template('group.html')
+@app.route("/group/add_user", methods=['POST'])
+def add_user():
+    user_name = request.form['new_member_name']
+    user_times = request.form['new_member_times']
+    resp=make_response(render_template('view_user.html', user_name=user_name, user_times = user_times))
+    resp.set_cookie('user_name', user_name)
+    return resp
 
 
-@app.route("/")
+@app.route("/group/create_user")
+def create_user():
+    return render_template("add_user.html")
+
+
+@app.route("/group/view_available_times")
+def view_times():
+    group_id = request.cookies.get('group_id')
+    return render_template("view_available_times.html", table=build_table(group_id))
+
+
+@app.route("/group/create_group/confirm_new_group", methods=['POST'])
+def confirm_group():
+    group_id = request.form['new_group_name']
+    member = request.form['first_member']
+    return render_template('group_creation_successful.html', group_name=group_id, first_member=member)
+
+
+@app.route('/group/redirect')
+def goto_group():
+    group_id = request.cookies.get('group_id')
+    return render_template('group.html', group_id=group_id)
+
+
+@app.route("/start")
 def start():
     return render_template('start_page.html')
 
@@ -88,9 +71,6 @@ def start():
 def input_page():
     return render_template('input.html')
 
-@app.route('/group/<group_id>')
-def group_page(group_name):
-    pass
 
 if __name__ == "__main__":
     app.run()

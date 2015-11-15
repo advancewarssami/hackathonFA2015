@@ -6,6 +6,12 @@
 </head>
 <body>
 <h1>Group Page</h1>
-<div1>Body</div1>
+<div1>Your Group ID: {{ group_id }}</div1><br>
+<form action="/group/view_available_times">
+    <input type="submit" value="View Available Times">
+</form>
+<form action="/group/create_user">
+    <input type="submit" value="Add a Member">
+</form>
 </body>
 </html>

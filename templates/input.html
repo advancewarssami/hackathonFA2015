@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%extends "master.html"%}
+{%block title%}
+Home Page
+{%endblock%}
+{%block body%}
 <h1>Enter Your Group ID</h1>
 <form action='/group' method="post">
     Group ID: <input type="text" name="group_name"><br>
-    <input type="submit" value="Submit">
-    <input type="button" value = "Create New Group" onclick="location.href='/group/create_group'">
+    <input type="submit" class="button" value="Submit" name="input_submit_button">
+    <input type="button" value = "Create New Group" class="button" onclick="location.href='/group/create_group'">
 </form>
-</body>
-</html>
+{%endblock%}

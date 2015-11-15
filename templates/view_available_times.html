@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Available Times</title>
-</head>
-<body>
-{{ table }}
-<input type="button" value = "Back To Group" onclick="location.href='/group/redirect'">
-</body>
-</html>
+{%extends "master.html"%}
+{%block title%}
+    Avaliable Times
+{%endblock%}
+{%block body%}
+    {{ table }}
+    <input type="button" class="button" value = "Back To Group" onclick="location.href='/group/redirect'">
+{%endblock%}

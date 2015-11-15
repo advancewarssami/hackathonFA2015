@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create a Group</title>
-</head>
-<body>
+{%extends "master.html"%}
+{%block title%}
+
+Create A Group
+
+{%endblock%}
+{%block body%}
 <form action="/group/create_group/confirm_new_group" method="post">
     New Group Name: <input type="text" name="new_group_name"><br>
     Starting Member of Group: <input type="text" name="first_member"><br>
-    <input type="submit" name="Create group">
+    <input type="submit" class="button" name="Create group">
 </form>
-</body>
-</html>
+{%endblock%}

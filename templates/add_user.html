@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add a Member</title>
-</head>
-<body>
-<div>Add a member to {{ group_id }}</div>
-<form action="/group/add_user" method="post">
-    Enter the new member's name: <input type="text" name="new_member_name">
-    Enter the new member's available times: <input type="text" name="new_member_times">
-    <input type="submit" value="Add member">
-</form>
-</body>
-</html>
+{%extends "master.html"%}
+{%block title%}
+    Add User Page
+{%endblock%}
+{%block body%}
+    <div1>Add a member to Group {{ group_id }}</div1><br>
+    <form action="/group/add_user" method="post">
+        Enter the new member's name: <input type="text" name="new_member_name">
+        Enter the new member's available times: <input type="text" name="new_member_times">
+        <input type="submit" class="button" value="Add member">
+    </form>
+{%endblock%}

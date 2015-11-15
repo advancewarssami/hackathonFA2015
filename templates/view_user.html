@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>View Member</title>
-</head>
-<body>
-<div>Member Details: </div>
-<div>Member Name: {{ user_name }}</div>
-<div>Bad times for the member:{{ user_times }}</div>
-<input type="button" value = "Back To Group" onclick="location.href='/group/redirect'">
-</body>
-</html>
+{%extends "master.html"%}
+{%block title%}
+    View Member
+{%endblock%}
+{%block body%}
+    <div>Member Details: </div>
+    <div>Member Name: {{ user_name }}</div>
+    <div>Bad times for the member:{{ user_times }}</div>
+    <input type="button" value = "Back To Group" class="button" onclick="location.href='/group/redirect'">
+{%endblock%}

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Group Creation Successful!</title>
-</head>
-<body>
-<h1>Group Creation Successful!</h1>
-<h2>Group Name: {{ group_name }}</h2>
-<h2>Starting Member: {{ first_member }}</h2>
-<input type="button" value = "View Group Page" onclick="location.href='/group/redirect'">
-</body>
-</html>
+{%extends "master.html"%}
+{%block title%}
+    Group Creation Successful
+{%endblock%}
+{%block body%}
+    <h1>Group Creation Successful!</h1>
+    <h2>Group Name: {{ group_name }}</h2>
+    <h2>Starting Member: {{ first_member }}</h2>
+    <input type="button" value = "View Group Page" class="button" onclick="location.href='/group/redirect'">
+{%endblock%}
+

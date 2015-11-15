@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from urllib.parse import urlparse, urljoin
-# import group
-# import handle_db
+import backend
+import handle_db
 app = Flask(__name__)
 
 
 
 def build_table(group_id):
     # return group.unserialize_good_times(handle_db.query_for_good_times(group_id))
+    # id = request.cookies.get('group_id')
+    # return handle_db.query_for_group_times(id)
     return request.cookies.get('group_id')
 
 
@@ -33,14 +35,14 @@ def create_group():
 def add_user():
     user_name = request.form['new_member_name']
     user_times = request.form['new_member_times']
-    resp=make_response(render_template('view_user.html', user_name=user_name, user_times = user_times))
+    resp = make_response(render_template('view_user.html', user_name=user_name, user_times=user_times))
     resp.set_cookie('user_name', user_name)
     return resp
 
 
 @app.route("/group/create_user")
 def create_user():
-    return render_template("add_user.html")
+    return render_template("add_user.html", group_id=request.cookies.get('group_id'))
 
 
 @app.route("/group/view_available_times")

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create a Group</title>
 </head>
 <body>
-<h1>Please Enter a new Group ID</h1>
-<form>
-    New Group ID: <input type="text" group_id="groupid"><br>
-    <input type="submit" value="Submit">
+<form action="/group/create_group/confirm_new_group" method="post">
+    New Group Name: <input type="text" name="new_group_name"><br>
+    Starting Member of Group: <input type="text" name="first_member"><br>
+    <input type="submit" name="Create group">
 </form>
 </body>
 </html>
